@@ -38,6 +38,15 @@ Any new tables or records that we add into the database will be removed after yo
 
 <summary> <code> #1 </code> </summary>
 
+CREATE TABLE person(
+    person_id SERIAL,
+    name VARCHAR(255),
+    age INTEGER,
+    height INTEGER,
+    city VARCHAR(255),
+    favorite_color VARCHAR(255)
+);
+
 ```sql
 CREATE TABLE person ( person_id SERIAL, name VARCHAR(200), age INTEGER, height INTEGER, city VARCHAR(200), favorite_color VARCHAR(200) );
 ```
@@ -47,6 +56,12 @@ CREATE TABLE person ( person_id SERIAL, name VARCHAR(200), age INTEGER, height I
 <details>
 
 <summary> <code> #2 </code> </summary>
+
+INSERT INTO person (name, age, height, city, favorite_color) VALUES ('Marshall', 24, 168, 'Midvale', 'purple');
+INSERT INTO person (name, age, height, city, favorite_color) VALUES ('Garrosh', 43, 460, 'Ogrimar', 'brown');
+INSERT INTO person (name, age, height, city, favorite_color) VALUES ('Varian', 36, 343, 'Stormwind', 'blue');
+INSERT INTO person (name, age, height, city, favorite_color) VALUES ('Arthas', 37, 385, 'Icecrown', 'white');
+INSERT INTO person (name, age, height, city, favorite_color) VALUES ('Illidan', 50, 400, 'Darnassas', 'green');
 
 ```sql
 INSERT INTO person ( name, age, height, city, favorite_color ) VALUES ( 'First Last', 21, 182, 'City', 'Color' );
@@ -58,6 +73,9 @@ INSERT INTO person ( name, age, height, city, favorite_color ) VALUES ( 'First L
 
 <summary> <code> #3 </code> </summary>
 
+SELECT * FROM person 
+ORDER BY height DESC;;
+
 ```sql
 SELECT * FROM person ORDER BY height DESC;
 ```
@@ -67,6 +85,9 @@ SELECT * FROM person ORDER BY height DESC;
 <details>
 
 <summary> <code> #4 </code> </summary>
+
+SELECT * FROM person 
+ORDER BY height;
 
 ```sql
 SELECT * FROM person ORDER BY height ASC;
@@ -78,6 +99,9 @@ SELECT * FROM person ORDER BY height ASC;
 
 <summary> <code> #5 </code> </summary>
 
+SELECT * FROM person 
+ORDER BY age DESC;
+
 ```sql
 SELECT * FROM person ORDER BY age DESC;
 ```
@@ -87,6 +111,9 @@ SELECT * FROM person ORDER BY age DESC;
 <details>
 
 <summary> <code> #6 </code> </summary>
+
+SELECT * FROM person 
+WHERE age > 20;
 
 ```sql
 SELECT * FROM person WHERE age > 20;
@@ -98,6 +125,9 @@ SELECT * FROM person WHERE age > 20;
 
 <summary> <code> #7 </code> </summary>
 
+SELECT * FROM person 
+WHERE age = 18;
+
 ```sql
 SELECT * FROM person WHERE age = 18;
 ```
@@ -107,6 +137,9 @@ SELECT * FROM person WHERE age = 18;
 <details>
 
 <summary> <code> #8 </code> </summary>
+
+SELECT * FROM person 
+WHERE age < 20 AND age > 30;
 
 ```sql
 SELECT * FROM person WHERE age < 20 OR age > 30;
@@ -118,6 +151,9 @@ SELECT * FROM person WHERE age < 20 OR age > 30;
 
 <summary> <code> #9 </code> </summary>
 
+SELECT * FROM person 
+WHERE age != 27;
+
 ```sql
 SELECT * FROM person WHERE age != 27;
 ```
@@ -127,6 +163,8 @@ SELECT * FROM person WHERE age != 27;
 <details>
 
 <summary> <code> #10 </code> </summary>
+
+SELECT * FROM person WHERE favorite_color != 'red';
 
 ```sql
 SELECT * FROM person WHERE favorite_color != 'red';
@@ -138,6 +176,10 @@ SELECT * FROM person WHERE favorite_color != 'red';
 
 <summary> <code> #11 </code> </summary>
 
+SELECT * FROM person 
+WHERE favorite_color != 'red' 
+AND favorite_color != 'blue';
+
 ```sql
 SELECT * FROM person WHERE favorite_color != 'red' AND favorite_color != 'blue';
 ```
@@ -147,6 +189,10 @@ SELECT * FROM person WHERE favorite_color != 'red' AND favorite_color != 'blue';
 <details>
 
 <summary> <code> #12 </code> </summary>
+
+SELECT * FROM person 
+WHERE favorite_color = 'orange' 
+OR favorite_color = 'green';
 
 ```sql
 SELECT * FROM person WHERE favorite_color = 'orange' OR favorite_color = 'green';
@@ -158,6 +204,10 @@ SELECT * FROM person WHERE favorite_color = 'orange' OR favorite_color = 'green'
 
 <summary> <code> #13 </code> </summary>
 
+SELECT * FROM person 
+WHERE favorite_color
+IN ('orange', 'green', 'blue');
+
 ```sql
 SELECT * FROM person WHERE favorite_color IN ( 'orange', 'green', 'blue' );
 ```
@@ -167,6 +217,10 @@ SELECT * FROM person WHERE favorite_color IN ( 'orange', 'green', 'blue' );
 <details>
 
 <summary> <code> #14 </code> </summary>
+
+SELECT * FROM person 
+WHERE favorite_color
+IN ('yellow', 'purple');
 
 ```sql
 SELECT * FROM person WHERE favorite_color IN ( 'yellow', 'purple' )
@@ -199,6 +253,13 @@ SELECT * FROM person WHERE favorite_color IN ( 'yellow', 'purple' )
 
 <summary> <code> #1 </code> </summary>
 
+CREATE TABLE orders (
+  person_id SERIAL,
+  product_name VARCHAR(255),
+  product_price INTEGER,
+  quantity INTEGER
+  );
+
 ```sql
 CREATE TABLE orders ( person_id SERIAL, product_name VARCHAR(200), product_price NUMERIC, quantity INTEGER );
 ```
@@ -208,6 +269,11 @@ CREATE TABLE orders ( person_id SERIAL, product_name VARCHAR(200), product_price
 <details>
 
 <summary> <code> #2 </code> </summary>
+
+INSERT INTO orders (product_name, product_price, quantity)
+VALUES ('keyboard', 15, 20);
+INSERT INTO orders (product_name, product_price, quantity)
+VALUES ('mouse', 35, 7);
 
 ```sql
 INSERT INTO orders ( person_id, product_name, product_price, quantity ) VALUES ( 0, 'Product', 12.50, 2 );
@@ -219,6 +285,8 @@ INSERT INTO orders ( person_id, product_name, product_price, quantity ) VALUES (
 
 <summary> <code> #3 </code> </summary>
 
+SELECT * FROM orders;
+
 ```sql
 SELECT * FROM orders;
 ```
@@ -228,6 +296,8 @@ SELECT * FROM orders;
 <details>
 
 <summary> <code> #4 </code> </summary>
+
+SELECT SUM(quantity) FROM orders;
 
 ```sql
 SELECT SUM(quantity) FROM orders;
@@ -239,6 +309,8 @@ SELECT SUM(quantity) FROM orders;
 
 <summary> <code> #5 </code> </summary>
 
+SELECT SUM(product_price * quantity) FROM orders;
+
 ```sql
 SELECT SUM(product_price * quantity) FROM orders;
 ```
@@ -248,6 +320,10 @@ SELECT SUM(product_price * quantity) FROM orders;
 <details>
 
 <summary> <code> #6 </code> </summary>
+
+SELECT SUM(product_price * quantity)
+FROM orders
+WHERE person_id = 1;
 
 ```sql
 /* The value of person_id depends on what IDs you used. Use a valid ID from your table */
@@ -278,6 +354,14 @@ SELECT SUM(product_price * quantity) FROM orders WHERE person_id = 0;
 
 <summary> <code> #1 </code> </summary>
 
+INSERT INTO artist (name, artist_id)
+VALUES ('walk the moon', 274);
+INSERT INTO artist (name, artist_id)
+VALUES ('ajr', 130);
+INSERT INTO artist (name, artist_id)
+VALUES ('jon bellion', 278);
+
+
 ```sql
 INSERT INTO artist ( name ) VALUES ( 'artist name' );
 ```
@@ -287,6 +371,10 @@ INSERT INTO artist ( name ) VALUES ( 'artist name' );
 <details>
 
 <summary> <code> #2 </code> </summary>
+
+SELECT name FROM artist 
+ORDER BY name DESC
+LIMIT 10;
 
 ```sql
 SELECT * FROM artist ORDER BY name DESC LIMIT 10;
@@ -298,6 +386,10 @@ SELECT * FROM artist ORDER BY name DESC LIMIT 10;
 
 <summary> <code> #3 </code> </summary>
 
+SELECT name FROM artist 
+ORDER BY name
+LIMIT 5;
+
 ```sql
 SELECT * FROM artist ORDER BY name ASC LIMIT 5;
 ```
@@ -308,6 +400,10 @@ SELECT * FROM artist ORDER BY name ASC LIMIT 5;
 
 <summary> <code> #4 </code> </summary>
 
+SELECT name FROM artist 
+WHERE name
+LIKE 'Black%';
+
 ```sql
 SELECT * FROM artist WHERE name LIKE 'Black%';
 ```
@@ -317,6 +413,10 @@ SELECT * FROM artist WHERE name LIKE 'Black%';
 <details>
 
 <summary> <code> #5 </code> </summary>
+
+SELECT name FROM artist 
+WHERE name
+LIKE '%Black%';
 
 ```sql
 SELECT * FROM artist WHERE name LIKE '%Black%';
@@ -347,6 +447,9 @@ SELECT * FROM artist WHERE name LIKE '%Black%';
 
 <summary> <code> #1 </code> </summary>
 
+SELECT first_name, last_name FROM employee
+WHERE city = 'Calgary';
+
 ```sql
 SELECT first_name, last_name FROM employee WHERE city = 'Calgary';
 ```
@@ -356,6 +459,10 @@ SELECT first_name, last_name FROM employee WHERE city = 'Calgary';
 <details>
 
 <summary> <code> #2 </code> </summary>
+
+SELECT birth_date FROM employee
+ORDER BY birth_date 
+LIMIT 1;
 
 ```sql
 SELECT MAX(birth_date) from employee;
@@ -367,6 +474,10 @@ SELECT MAX(birth_date) from employee;
 
 <summary> <code> #3 </code> </summary>
 
+SELECT birth_date FROM employee
+ORDER BY birth_date DESC
+LIMIT 1;
+
 ```sql
 SELECT MIN(birth_date) from employee;
 ```
@@ -377,6 +488,8 @@ SELECT MIN(birth_date) from employee;
 
 <summary> <code> #4 </code> </summary>
 
+SELECT * FROM employee WHERE reports_to = 2;
+
 ```sql
 SELECT * FROM employee WHERE reports_to = 2;
 ```
@@ -386,6 +499,9 @@ SELECT * FROM employee WHERE reports_to = 2;
 <details>
 
 <summary> <code> #5 </code> </summary>
+
+SELECT COUNT(*) FROM employee
+WHERE city = 'Lethbridge';
 
 ```sql
 SELECT COUNT(*) FROM employee WHERE city = 'Lethbridge';
@@ -418,6 +534,9 @@ SELECT COUNT(*) FROM employee WHERE city = 'Lethbridge';
 
 <summary> <code> #1 </code> </summary>
 
+SELECT COUNT(*) FROM invoice
+WHERE billing_country = 'USA';
+
 ```sql
 SELECT COUNT(*) FROM invoice WHERE billing_country = 'USA';
 ```
@@ -427,6 +546,8 @@ SELECT COUNT(*) FROM invoice WHERE billing_country = 'USA';
 <details>
 
 <summary> <code> #2 </code> </summary>
+
+SELECT MAX(total) FROM invoice;
 
 ```sql
 SELECT MAX(total) FROM invoice;
@@ -438,6 +559,8 @@ SELECT MAX(total) FROM invoice;
 
 <summary> <code> #3 </code> </summary>
 
+SELECT MIN(total) FROM invoice;
+
 ```sql
 SELECT MIN(total) FROM invoice;
 ```
@@ -447,6 +570,9 @@ SELECT MIN(total) FROM invoice;
 <details>
 
 <summary> <code> #4 </code> </summary>
+
+SELECT COUNT(*) FROM invoice 
+WHERE total > 5;
 
 ```sql
 SELECT * FROM invoice WHERE total > 5;
@@ -458,6 +584,9 @@ SELECT * FROM invoice WHERE total > 5;
 
 <summary> <code> #5 </code> </summary>
 
+SELECT COUNT(*) FROM invoice 
+WHERE total < 5;
+
 ```sql
 SELECT COUNT(*) FROM invoice WHERE total < 5;
 ```
@@ -467,6 +596,9 @@ SELECT COUNT(*) FROM invoice WHERE total < 5;
 <details>
 
 <summary> <code> #6 </code> </summary>
+
+SELECT COUNT(*) FROM invoice 
+WHERE billing_state IN ('CA', 'TX', 'AZ');
 
 ```sql
 SELECT COUNT(*) FROM invoice WHERE billing_state in ('CA', 'TX', 'AZ');
@@ -478,6 +610,8 @@ SELECT COUNT(*) FROM invoice WHERE billing_state in ('CA', 'TX', 'AZ');
 
 <summary> <code> #7 </code> </summary>
 
+SELECT AVG(total) FROM invoice;
+
 ```sql
 SELECT AVG(total) FROM invoice;
 ```
@@ -487,6 +621,8 @@ SELECT AVG(total) FROM invoice;
 <details>
 
 <summary> <code> #8 </code> </summary>
+
+SELECT SUM(total) FROM invoice;
 
 ```sql
 SELECT SUM(total) FROM invoice;
